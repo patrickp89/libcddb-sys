@@ -1,0 +1,12 @@
+[package]
+name = "libcddb-sys"
+description = "Rust bindings for libcddb"
+version = "0.1.0"
+authors = ["patrickp89 <patrickpreuss@netherspace.de>"]
+license-file = "LICENSE"
+edition = "2018"
+
+[build-dependencies]
+bindgen = "0.54.1"
+
+[dependencies]
