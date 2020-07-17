@@ -7,7 +7,7 @@ fn main() {
     println!("cargo:rustc-link-lib=cddb");
 
     let bindings = bindgen::Builder::default()
-        .header_contents("wrapper.h", "#include <cddb/cddb_disc.h>")
+        .header_contents("wrapper.h", "#include <cddb/cddb.h>")
         .generate()
         .expect("Unable to generate bindings");
 
