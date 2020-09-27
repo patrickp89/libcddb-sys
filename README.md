@@ -1,5 +1,5 @@
 # libcddb-sys
-[![Build Status](https://travis-ci.org/patrickp89/libcddb-sys.svg?branch=master)](https://travis-ci.org/patrickp89/libcddb-sys)
+[![Build Status](https://travis-ci.com/patrickp89/libcddb-sys.svg?branch=master)](https://travis-ci.com/patrickp89/libcddb-sys)
 
 Low-level Rust bindings for the [libcddb](http://libcddb.sourceforge.net/) library. Generated
 via [rust-bindgen](https://github.com/rust-lang/rust-bindgen).

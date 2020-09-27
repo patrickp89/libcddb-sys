@@ -21,7 +21,7 @@ mod tests {
         // initialize a connection to our mock CDDB server (see
         // http://libcddb.sourceforge.net/tutorial.html#section4 for details):
         let conn = unsafe { cddb_new() };
-        assert_eq!(conn.is_null(), false);
+        assert!(!conn.is_null());
 
         let server_name = CString::new("gnudb.gnudb.org").expect("Could not create CString!");
         unsafe { cddb_set_server_name(conn, server_name.as_ptr()) };
@@ -38,7 +38,7 @@ mod tests {
 
         // initialize disc and tracks:
         let disc = unsafe { cddb_disc_new() };
-        assert_eq!(disc.is_null(), false);
+        assert!(!disc.is_null());
 
         unsafe { cddb_disc_set_length(disc, disc_length) }
         let actual_length = unsafe { cddb_disc_get_length(disc) };
@@ -46,7 +46,7 @@ mod tests {
 
         for offset in frame_offsets.iter() {
             let track = unsafe { cddb_track_new() };
-            assert_eq!(track.is_null(), false);
+            assert!(!track.is_null());
 
             unsafe { cddb_track_set_frame_offset(track, *offset) };
             let actual_offset: i32 = unsafe { cddb_track_get_frame_offset(track) };
@@ -59,11 +59,31 @@ mod tests {
         }
 
         // query the CD database:
-        // TODO: let matches: i32 = unsafe { cddb_query(conn, disc) };
-        // TODO: assert_ne!(matches, -1);
-        // TODO: mock the TCP responses!
+        /* TODO: mock the server responses!
+        let matches: i32 = unsafe { cddb_query(conn, disc) };
+        assert_ne!(matches, -1);
 
-        // TODO: test the cddb_query_next() magic!
+        // check the first match:
+        let raw_disc_title = unsafe { CStr::from_ptr(cddb_disc_get_title(disc)) };
+        let disc_title = raw_disc_title.to_str().expect("to_str() failed!");
+        assert_ne!(disc_title, "");
+
+        // and its first track:
+        let first_track = unsafe { cddb_disc_get_track_first(disc) };
+        assert!(!first_track.is_null());
+        let raw_first_track_title = unsafe { CStr::from_ptr(cddb_track_get_artist(first_track)) };
+        // TODO: cddb_track_get_artist() works, but cddb_track_get_title() does not?!
+        let first_track_title = raw_first_track_title.to_str().expect("to_str() failed!");
+        assert_ne!(first_track_title, "");
+        println!("First track's title is {:?}", first_track_title);
+
+        // check the second match (i.e. the second matching disc):
+        let second_query_matches: i32 = unsafe { cddb_query_next(conn, disc) };
+        assert_ne!(second_query_matches, -1);
+        let second_raw_disc_title = unsafe { CStr::from_ptr(cddb_disc_get_title(disc)) };
+        let second_disc_title = second_raw_disc_title.to_str().expect("to_str() failed!");
+        assert_ne!(second_disc_title, "");
+        */
 
         // free pointer:
         unsafe { cddb_disc_destroy(disc) };

@@ -2,5 +2,12 @@ dist: bionic
 language: rust
 cache: cargo
 
-before_install:
-  - sudo apt-get -y install build-essential llvm-dev libclang-dev clang libcddb2-dev
+addons:
+  apt:
+    update: true
+    packages:
+      - build-essential
+      - llvm-dev
+      - libclang-dev
+      - clang
+      - libcddb2-dev
